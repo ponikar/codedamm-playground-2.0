@@ -40,7 +40,7 @@ export const FileManager = () => {
   return (
     <section
       onDoubleClick={() => setShowCreateFF(true)}
-      className="col-span-2 bg-slate-800 h-full"
+      className="bg-slate-800"
     >
       {showCreateFF && <CreateFF onBlur={() => setShowCreateFF(false)} />}
       <RenderFF content={FAKE_FILES} />

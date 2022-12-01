@@ -1,9 +1,10 @@
 import Editor from "@monaco-editor/react";
+import Split from "react-split";
 import { Terminal } from "../Terminal/Terminal";
 
 export const CodeEditor = () => {
   return (
-    <div className="col-span-5">
+    <Split className="h-full" sizes={[70, 30]} direction="vertical">
       <Editor
         height="70%"
         width="100%"
@@ -16,6 +17,6 @@ export const CodeEditor = () => {
         }}
       />
       <Terminal />
-    </div>
+    </Split>
   );
 };

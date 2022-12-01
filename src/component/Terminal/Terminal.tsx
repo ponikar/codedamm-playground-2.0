@@ -75,5 +75,5 @@ export const Terminal = () => {
       }
     };
   }, []);
-  return <div id="terminal" className="h-[30%] w-full p-2"></div>;
+  return <div id="terminal" className="w-full bg-red-400"></div>;
 };
