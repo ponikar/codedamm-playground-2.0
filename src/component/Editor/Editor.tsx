@@ -1,10 +1,11 @@
 import Editor from "@monaco-editor/react";
+import { Terminal } from "../Terminal/Terminal";
 
 export const CodeEditor = () => {
   return (
-    <div className="col-span-5 resize">
+    <div className="col-span-5">
       <Editor
-        height="100%"
+        height="70%"
         width="100%"
         theme="vs-dark"
         defaultLanguage="javascript"
@@ -14,6 +15,7 @@ export const CodeEditor = () => {
           console.log("onChange", value, event);
         }}
       />
+      <Terminal />
     </div>
   );
 };
