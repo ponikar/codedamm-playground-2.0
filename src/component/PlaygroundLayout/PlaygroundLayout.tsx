@@ -1,17 +1,14 @@
 import { FC, PropsWithChildren } from "react";
+import Split from "react-split";
 import { CodeEditor } from "../Editor/Editor";
 import { FileManager } from "../FileManager/FileManager";
 
 export const PlaygroundLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
-    <section className="w-full h-full grid grid-cols-12">
-      {/* for file */}
+    <Split sizes={[20, 45, 25]} className="h-full flex" direction="horizontal">
       <FileManager />
-      {/* code editor */}
       <CodeEditor />
-
-      {/* for output */}
-      <div className="col-span-5 border">output</div>
-    </section>
+      <div className="">OUTPUT SCREEN</div>
+    </Split>
   );
 };
