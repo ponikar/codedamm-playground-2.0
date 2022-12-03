@@ -5,21 +5,16 @@ import { RenderFF } from "./RenderFF";
 
 interface Props {
   content: FolderProps;
-  level?: number;
 }
 
-export const RenderFolder: FC<Props> = ({ content, level = 0 }) => {
+export const RenderFolder: FC<Props> = ({ content }) => {
   const [expand, setExpand] = React.useState(false);
   return (
     <div key={content.id}>
-      <Folder
-        onClick={() => setExpand((e) => !e)}
-        level={level}
-        name={content.name}
-      />
+      <Folder onClick={() => setExpand((e) => !e)} content={content} />
       {expand && content.files && (
         <div>
-          <RenderFF level={level + 1} content={content.files} />
+          <RenderFF content={content.files} />
         </div>
       )}
     </div>

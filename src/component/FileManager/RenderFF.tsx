@@ -5,21 +5,17 @@ import { RenderFolder } from "./RenderFolder";
 
 interface RenderFFProps {
   content: (FileProps | FolderProps)[];
-
-  level?: number;
 }
 
-export const RenderFF: FC<RenderFFProps> = memo(({ content, level = 0 }) => {
+export const RenderFF: FC<RenderFFProps> = memo(({ content }) => {
   return (
     <>
       {content.map((content) => {
         if (content.type === "folder") {
-          return (
-            <RenderFolder key={content.id} content={content} level={level} />
-          );
+          return <RenderFolder key={content.id} content={content} />;
         }
 
-        return <File level={level} key={content.id} {...content} />;
+        return <File key={content.id} {...content} />;
       })}
     </>
   );
