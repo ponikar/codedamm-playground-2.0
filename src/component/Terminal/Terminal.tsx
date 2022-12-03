@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const xtermjsTheme = {
   foreground: "#F8F8F8",
@@ -24,47 +24,46 @@ const xtermjsTheme = {
 
 export const Terminal = () => {
   const loaded = useRef(false);
+
+  const [command, setCommand] = useState("");
   useEffect(() => {
     const container = document.getElementById("terminal");
     (async () => {
       const { Terminal } = await import("xterm");
       const { FitAddon } = await import("xterm-addon-fit");
 
-      let command = "";
-
-      if (container) {
+      if (container && !container.hasChildNodes()) {
         const terminal = new Terminal({
-          theme: xtermjsTheme,
+          // theme: xtermjsTheme,
         });
         const fitAddon = new FitAddon();
         terminal.loadAddon(fitAddon);
-        // terminal.open(container);
+        terminal.open(container);
         terminal.write("Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ");
         fitAddon.fit();
 
         terminal.onData((data) => {
           console.log("DATA", data);
-          command += data;
-          terminal.write(data);
+          if (data) {
+            setCommand((d) => d + data);
+            terminal.write(data);
+          }
         });
 
-        terminal.attachCustomKeyEventHandler((e) => {
-          // backspace key
-          if (e.keyCode === 8 && command.length > 1) {
-            command = command.slice(0, -1);
-            terminal.write("\b \b");
-            return false;
+        terminal.onKey((e) => {
+          // handle backspace
+          if (e.domEvent.key === "Backspace") {
+            setCommand((d) => {
+              console.log("BEFORE", d);
+              const command = d.slice(0, -1);
+              console.log("AFTER", command);
+              if (command.length > 0) {
+                terminal.write("\b \b");
+              }
+              return command;
+            });
           }
-          // enter key
-          if (e.keyCode === 13) {
-            console.log("COMMAND", command);
-            command = "";
-            terminal.write("\r");
-            return false;
-          }
-          return true;
         });
-        loaded.current = true;
       }
     })();
 
@@ -75,5 +74,5 @@ export const Terminal = () => {
       }
     };
   }, []);
-  return <div id="terminal" className="w-full bg-red-400"></div>;
+  return <div id="terminal" className="w-full bg-slate-800 relative"></div>;
 };

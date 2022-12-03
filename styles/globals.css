@@ -22,3 +22,7 @@ body,
 .gutter-vertical {
   cursor: row-resize;
 }
+
+.xterm-helpers {
+  /* display: none !important; */
+}
