@@ -14,10 +14,16 @@ export const FFClickable: FC<PropsWithChildren<FFClickableProps>> = ({
   className,
   ...props
 }) => {
+  const onPress: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    props.onClick?.(e);
+  };
   return (
     <button
-      className={`w-full flex flex-start gap-2 items-center text-sm text-gray-200 p-1 px-4 hover:bg-slate-700 ${className}`}
+      className={`w-full flex cursor-pointer flex-start gap-2 items-center text-sm text-gray-200 p-1 px-4 hover:bg-slate-700 ${className}`}
       {...props}
+      onClick={onPress}
     >
       {icon && (
         <Image

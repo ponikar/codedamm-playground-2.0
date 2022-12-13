@@ -15,7 +15,7 @@ export const RenderFF: FC<RenderFFProps> = memo(({ content }) => {
           return <RenderFolder key={content.id} content={content} />;
         }
 
-        return <File key={content.id} {...content} />;
+        return <File key={content.id} file={content} />;
       })}
     </>
   );

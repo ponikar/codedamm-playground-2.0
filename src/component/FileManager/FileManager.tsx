@@ -19,7 +19,7 @@ export const FileManager = () => {
       createRootContent({
         name: fileName,
         type: fileName.split(".").length > 1 ? "file" : "folder",
-        id: Math.random().toString(),
+        id: `${fileName}-${Math.random().toString()}`,
         level: 0,
       });
     }
