@@ -23,7 +23,6 @@ export const Folder: FC<FolderFCProps> = memo(({ content, ...props }) => {
   const onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
     const fileName = e.target.value;
     if (fileName) {
-      console.log("PARENTS", props.parent);
       createContent(
         // parent,
         content,

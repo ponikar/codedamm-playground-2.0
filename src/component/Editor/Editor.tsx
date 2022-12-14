@@ -1,6 +1,8 @@
+// @ts-nocheck
 import Editor from "@monaco-editor/react";
 import { useEffect, useRef } from "react";
 import Split from "react-split";
+import { getCodeEditorExtension } from "../../constants/file";
 import {
   useFileContentActions,
   useActiveContent,
@@ -47,15 +49,14 @@ export const CodeEditor = () => {
     );
   }
 
-  console.log("ACTIVE FILE", files[activeFile.id].content);
-
   return (
     <Split className="h-full" sizes={[70, 30]} direction="vertical">
       <Editor
         height="70%"
         width="100%"
         theme="vs-dark"
-        defaultLanguage="javascript"
+        defaultLanguage="text"
+        language={getCodeEditorExtension(activeFile.name)}
         value={files[activeFile.id].content}
         onChange={onChange}
       />
